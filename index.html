@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title> Počasí + radar </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="bootstrap.css">
+        <link rel="icon" type="image/png" href="radar.png"/>
+    </head>
+
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container relative-top rounded-lg bg-dark p-3 opacity-7">
+            <div class="row">
+                <div class="col-md-5 mb-2">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text font-weight-bold">Název města</span>
+                        </div>
+                        <input id="lokace" type="text" class="form-control" placeholder="Zadej lokaci..." aria-label="Input phrase" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+    
+                <div class="col-md-2 mb-2 text-left">
+                        <button id="tlaHledej" type="button" class="btn btn-warning3 text-warning3 px-4">Hledej ...</button>
+                </div>
+
+                <div class="col-md-3 mb-2 text-center">
+                    <div id="datum" type="text" class="font-weight-bold text-warning3 text-center pt-0"></div>
+                    <div id="hodiny" type="text" class="font-weight-bold text-warning3 text-center pt-0"></div>
+                </div>
+
+                <div class="col-md-2 mb-2 text-right">
+                        <button id="tlaSmaz" type="button" class="btn btn-secondary px-3">Smaž historii</button>
+                </div>
+    
+                <div class="container">
+                    <form>
+                        <textarea id="historiePole" class="form-control"></textarea>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card rounded-lg bg-dark p-2">
+            <iframe src="https://www.rainviewer.com/map.html?loc=49.2059,17.8343,10&oFa=0&oC=0&oU=0&oCS=1&oF=1&oAP=0&rmt=4&c=1&o=83&lm=0&th=0&sm=1&sn=1" width="100%" frameborder="0" style="border:0;height:50vh;" allowfullscreen></iframe>
+        </div>
+
+        <div class="container relative-bottom opacity-8 px-3">
+            <div class="row">
+                <div class="card col-md-6 mb-2 bg-dark">
+                    <h3 type="text" class="text-center text-info pt-2 pl-5">Odkazy :</h3>
+                    <ul class="noDot">
+                        <li class="lead text-center"> <a href="https://meteoradar.kr-zlinsky.cz/"> <h5 class="text-white"> Radar Zlín </h5> </a> </li>
+                        <li class="lead text-center"> <a href="http://radar.bourky.cz/"> <h5 class="text-white"> Radar ČR </h5> </a> </li>
+                        <li class="lead text-center"> <a href="http://www.radareu.cz/"> <h5 class="text-white"> Radar EU </h5> </a> </li>
+                    </ul>
+                </div>
+
+                <div class="card col-md-6 mb-2 bg-dark">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4 type="text" id ="poloha" class="text-center text-white pt-2 pl-0"> </h4>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <img id="vlajka" class="text-center pt-0" src=" ">
+                            </div>
+
+                        </div>
+                    </div>
+                    <h2 type="text" id ="teplota" class="text-center text-warning3 pt-0 pl-0"> </h2>
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h5 type="text" id ="pocasi" class="text-center text-white pt-2 pl-0"> </h5>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="text-center">
+                                <img src=" " id="pocasiIkona" class="icon text-center"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p type="text" id ="oblacnost" class="text-center text-white pt-0 pl-0"> </p>
+                    <p type="text" id ="vitr" class="text-center text-white pt-0 pl-0"> </p>
+                    <p type="text" id ="tlak" class="text-center text-white pt-0 pl-0"> </p>
+                    <p type="text" id ="vlhkost" class="text-center text-white pt-0 pl-0"> </p>
+
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="d-flex justify-content-around pl-2">
+            <div class="row">
+                <div class="p-1">
+                    <div id="widget01" class="text-center"></div>
+                </div>
+                <div class="p-1">
+                    <div id="widget02" class="text-center"></div>
+                </div>
+                <div class="p-1">
+                    <div id="widget03" class="text-center"></div>
+                </div>
+            </div>
+        </div>
+            <br>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="bootstrap.min.js"></script>
+
+        <script src="main.js"async defer></script>
+    </body>
+</html>
